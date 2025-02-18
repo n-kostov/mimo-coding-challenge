@@ -1,4 +1,5 @@
 using LearningCenter.Infrastructure;
+using LearningCenter.Web;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -24,5 +25,7 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+
+app.Initialize();
 
 app.Run();

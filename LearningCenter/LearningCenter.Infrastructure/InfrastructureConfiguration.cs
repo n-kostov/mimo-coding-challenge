@@ -17,6 +17,7 @@ namespace LearningCenter.Infrastructure
                     .UseSqlite(
                         configuration.GetConnectionString("DefaultConnection"),
                         b => b.MigrationsAssembly(typeof(LearningCenterDbContext).Assembly.FullName)))
+                .AddTransient<IInitializer, LearningCenterDbInitializer>()
                 .AddTransient(typeof(IRepository<>), typeof(DataRepository<>));
     }
 }
