@@ -6,6 +6,6 @@ namespace LearningCenter.Domain.Factories.Courses
     {
         ICourseFactory WithName(string name);
         ICourseFactory WithChapter(string name);
-        ICourseFactory WithLesson(int chapterId, string lessonName);
+        ICourseFactory WithLesson(string chapterName, string lessonName);
     }
 }

@@ -22,9 +22,9 @@ namespace LearningCenter.Domain.Factories.Courses
             return this;
         }
 
-        public ICourseFactory WithLesson(int chapterId, string lessonName)
+        public ICourseFactory WithLesson(string chapterName, string lessonName)
         {
-            var chapter = _chapters.FirstOrDefault(c => c.Id == chapterId);
+            var chapter = _chapters.FirstOrDefault(c => c.Name == chapterName);
             if (chapter == null)
             {
                 throw new InvalidCourseException("Chapter not found.");
@@ -39,7 +39,7 @@ namespace LearningCenter.Domain.Factories.Courses
             var course = new Course(_name);
             foreach (var chapter in _chapters)
             {
-                course.AddChapter(chapter.Name);
+                course.AddChapter(chapter);
             }
 
             return course;

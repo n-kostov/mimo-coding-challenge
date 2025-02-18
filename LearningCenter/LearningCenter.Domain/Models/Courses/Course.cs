@@ -21,6 +21,8 @@ namespace LearningCenter.Domain.Models.Courses
             Name = name; 
         }
 
+        internal void AddChapter(Chapter chapter) => _chapters.Add(chapter);
+
         public void AddChapter(string name)
         {
             int nextOrder = _chapters.Count > 0 ? _chapters.Max(c => c.Order) + 1 : 1;
@@ -28,9 +30,9 @@ namespace LearningCenter.Domain.Models.Courses
             _chapters.Add(chapter);
         }
 
-        public void AddLessonToChapter(int chapterId, string lessonName)
+        public void AddLessonToChapter(string chapterName, string lessonName)
         {
-            var chapter = _chapters.FirstOrDefault(c => c.Id == chapterId);
+            var chapter = _chapters.FirstOrDefault(c => c.Name == chapterName);
             if (chapter == null)
             {
                 throw new InvalidCourseException("Chapter not found.");

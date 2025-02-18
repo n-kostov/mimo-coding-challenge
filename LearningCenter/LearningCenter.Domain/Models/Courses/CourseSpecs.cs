@@ -58,7 +58,7 @@ namespace LearningCenter.Domain.Models.Courses
             var chapterId = course.Chapters.First().Id;
 
             // Act
-            course.AddLessonToChapter(chapterId, "Hello World");
+            course.AddLessonToChapter("Introduction", "Hello World");
 
             // Assert
             var chapter = course.Chapters.First();
@@ -74,7 +74,7 @@ namespace LearningCenter.Domain.Models.Courses
             var nonExistentChapterId = 999;
 
             // Act
-            Action act = () => course.AddLessonToChapter(nonExistentChapterId, "Hello World");
+            Action act = () => course.AddLessonToChapter("Introduction", "Hello World");
 
             // Assert
             act.Should().Throw<InvalidCourseException>().WithMessage("Chapter not found.");
