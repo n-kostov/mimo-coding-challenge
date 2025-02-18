@@ -21,40 +21,37 @@ namespace LearningCenter.Domain.Models.Courses
         }
 
         [Fact]
-        public void AddChapter_Should_Add_Chapter_With_Correct_Order()
+        public void AddChapter_ShouldAddChapter_WhenValidChapterProvided()
         {
             // Arrange
             var course = new Course("C# Fundamentals");
-            var chapter1 = new Chapter("Introduction", 1, 1);
-            var chapter2 = new Chapter("OOP Basics", 1, 2);
 
             // Act
-            course.AddChapter(chapter1);
-            course.AddChapter(chapter2);
+            course.AddChapter("Introduction");
 
             // Assert
-            course.Chapters.Should().HaveCount(2);
-            course.Chapters.First().Should().Be(chapter1);
-            course.Chapters.Last().Should().Be(chapter2);
+            course.Chapters.Should().ContainSingle();
+            course.Chapters.First().Name.Should().Be("Introduction");
+            course.Chapters.First().Order.Should().Be(1);
+            course.Chapters.First().CourseId.Should().Be(course.Id);
         }
 
         [Fact]
-        public void AddChapter_Should_ThrowException_When_Order_Is_Wrong()
+        public void AddChapter_ShouldAddChaptersInOrder_WhenValidChaptersProvided()
         {
             // Arrange
-            var course = new Course("C# Fundamentals");
-            var chapter1 = new Chapter("Introduction", 1, 1);
-            var chapter2 = new Chapter("OOP Basics", 1, 3); // Wrong order (should be 2)
-
-            course.AddChapter(chapter1);
+            var course = new Course("C#");
 
             // Act
-            Action act = () => course.AddChapter(chapter2);
+            course.AddChapter("Introduction");
+            course.AddChapter("OOP");
 
             // Assert
-            act.Should()
-                .Throw<InvalidCourseException>()
-                .WithMessage("Chapter order must be 2.");
+            course.Chapters.Should().HaveCount(2);
+            course.Chapters.First().Name.Should().Be("Introduction");
+            course.Chapters.First().Order.Should().Be(1);
+            course.Chapters.Last().Name.Should().Be("OOP");
+            course.Chapters.Last().Order.Should().Be(2);
         }
     }
 }

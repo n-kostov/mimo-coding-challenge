@@ -24,13 +24,10 @@ namespace LearningCenter.Domain.Models.Courses
             Order = order; 
         }
 
-        public void AddLesson(Lesson lesson)
+        public void AddLesson(string name)
         {
             int nextOrder = _lessons.Count > 0 ? _lessons.Max(l => l.Order) + 1 : 1;
-            if (lesson.Order != nextOrder)
-            {
-                throw new InvalidChapterException($"Lesson order must be {nextOrder}.");
-            }
+            var lesson = new Lesson(name, this.Id, nextOrder);
             _lessons.Add(lesson);
         }
 

@@ -1,5 +1,6 @@
 ﻿using LearningCenter.Domain.Common;
 using LearningCenter.Domain.Exceptions;
+using System.Xml.Linq;
 using static LearningCenter.Domain.Models.ModelConstants.Common;
 
 namespace LearningCenter.Domain.Models.Courses
@@ -20,13 +21,10 @@ namespace LearningCenter.Domain.Models.Courses
             Name = name; 
         }
 
-        public void AddChapter(Chapter chapter)
+        public void AddChapter(string name)
         {
             int nextOrder = _chapters.Count > 0 ? _chapters.Max(c => c.Order) + 1 : 1;
-            if (chapter.Order != nextOrder)
-            {
-                throw new InvalidCourseException($"Chapter order must be {nextOrder}.");
-            }
+            var chapter = new Chapter(name, this.Id, nextOrder);
             _chapters.Add(chapter);
         }
 
