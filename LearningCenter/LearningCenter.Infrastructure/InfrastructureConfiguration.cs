@@ -1,4 +1,6 @@
-﻿using LearningCenter.Infrastructure.Persistence;
+﻿using LearningCenter.Application.Contracts;
+using LearningCenter.Infrastructure.Persistence;
+using LearningCenter.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,6 +16,7 @@ namespace LearningCenter.Infrastructure
                 .AddDbContext<LearningCenterDbContext>(options => options
                     .UseSqlite(
                         configuration.GetConnectionString("DefaultConnection"),
-                        b => b.MigrationsAssembly(typeof(LearningCenterDbContext).Assembly.FullName)));
+                        b => b.MigrationsAssembly(typeof(LearningCenterDbContext).Assembly.FullName)))
+                .AddTransient(typeof(IRepository<>), typeof(DataRepository<>));
     }
 }
