@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.11.35431.28
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningCenter.Web", "LearningCenter\LearningCenter.Web.csproj", "{42FF63B8-B2B7-46A5-ACAC-16FD02886438}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningCenter.Web", "LearningCenter.Web\LearningCenter.Web.csproj", "{42FF63B8-B2B7-46A5-ACAC-16FD02886438}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningCenter.Domain", "LearningCenter.Domain\LearningCenter.Domain.csproj", "{41BAA3E3-D406-41CC-B470-D9697D67AFB4}"
 EndProject
