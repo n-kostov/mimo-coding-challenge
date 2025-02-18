@@ -21,8 +21,9 @@ namespace LearningCenter.Domain.Models.Users
             Name = name;
         }
 
-        public void AddAchievement(UserAchievement achievement)
+        public void AddAchievement(int achievementId, bool isCompleted, int progress)
         {
+            var achievement = new UserAchievement(achievementId, isCompleted, progress);
             if (Achievements.Any(a => a.AchievementId == achievement.AchievementId))
             {
                 throw new InvalidUserException("Achievement already exists for this user.");
@@ -31,8 +32,9 @@ namespace LearningCenter.Domain.Models.Users
             Achievements.Add(achievement);
         }
 
-        public void AddLessonCompleted(LessonCompleted lessonCompleted)
+        public void AddLessonCompleted(int lessonId, DateTime startedOn, DateTime completedOn)
         {
+            var lessonCompleted = new LessonCompleted(lessonId, startedOn, completedOn);
             if (LessonsCompleted.Any(lc => lc.CompletedOn > lessonCompleted.StartedOn))
             {
                 throw new InvalidUserException("New lesson completion should be in the future.");

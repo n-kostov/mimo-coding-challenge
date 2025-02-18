@@ -46,10 +46,9 @@ namespace LearningCenter.Domain.Models.Users
         {
             // Arrange
             var user = new User("John Doe");
-            var achievement = new UserAchievement(1, false, 50);
 
             // Act
-            user.AddAchievement(achievement);
+            user.AddAchievement(1, false, 50);
 
             // Assert
             user.Achievements.Should().ContainSingle(a => a.AchievementId == 1);
@@ -60,11 +59,10 @@ namespace LearningCenter.Domain.Models.Users
         {
             // Arrange
             var user = new User("John Doe");
-            var achievement = new UserAchievement(1, false, 50);
-            user.AddAchievement(achievement);
+            user.AddAchievement(1, false, 50);
 
             // Act
-            Action act = () => user.AddAchievement(achievement);
+            Action act = () => user.AddAchievement(1, false, 50);
 
             // Assert
             act.Should()
@@ -77,11 +75,9 @@ namespace LearningCenter.Domain.Models.Users
         {
             // Arrange
             var user = new User("John Doe");
-            var lessonCompletedYesterday = new LessonCompleted(1, DateTime.UtcNow.AddHours(-24), DateTime.UtcNow.AddHours(-20));
-            var lessonCompletedToday = new LessonCompleted(2, DateTime.UtcNow.AddHours(1), DateTime.UtcNow.AddHours(2));
             // Act
-            user.AddLessonCompleted(lessonCompletedYesterday);
-            user.AddLessonCompleted(lessonCompletedToday);
+            user.AddLessonCompleted(1, DateTime.UtcNow.AddHours(-24), DateTime.UtcNow.AddHours(-20));
+            user.AddLessonCompleted(2, DateTime.UtcNow.AddHours(1), DateTime.UtcNow.AddHours(2));
 
             // Assert
             user.LessonsCompleted.Should().HaveCount(2);
@@ -92,14 +88,11 @@ namespace LearningCenter.Domain.Models.Users
         {
             // Arrange
             var user = new User("John Doe");
-            var lessonCompletedYesterday = new LessonCompleted(1, DateTime.UtcNow.AddHours(-24), DateTime.UtcNow.AddHours(-20));
-            var lessonCompletedToday = new LessonCompleted(2, DateTime.UtcNow.AddHours(1), DateTime.UtcNow.AddHours(2));
-            user.AddLessonCompleted(lessonCompletedYesterday);
-            user.AddLessonCompleted(lessonCompletedToday);
+            user.AddLessonCompleted(1, DateTime.UtcNow.AddHours(-24), DateTime.UtcNow.AddHours(-20));
+            user.AddLessonCompleted(2, DateTime.UtcNow.AddHours(1), DateTime.UtcNow.AddHours(2));
 
-            var invalidLessonCompleted = new LessonCompleted(3, DateTime.UtcNow.AddHours(-1), DateTime.UtcNow);
             // Act
-            Action act = () => user.AddLessonCompleted(invalidLessonCompleted);
+            Action act = () => user.AddLessonCompleted(3, DateTime.UtcNow.AddHours(-1), DateTime.UtcNow);
 
             // Assert
             act.Should()
