@@ -87,11 +87,7 @@ namespace LearningCenter.Domain.Common
         private static void ThrowException<TException>(string message)
             where TException : BaseDomainException, new()
         {
-            var exception = new TException
-            {
-                Error = message
-            };
-
+            var exception = (TException)Activator.CreateInstance(typeof(TException), message)!;
             throw exception;
         }
     }

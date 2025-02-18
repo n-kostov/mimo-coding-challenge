@@ -1,6 +1,5 @@
 ﻿using LearningCenter.Domain.Common;
 using LearningCenter.Domain.Exceptions;
-using System.Xml.Linq;
 using static LearningCenter.Domain.Models.ModelConstants.Common;
 
 namespace LearningCenter.Domain.Models.Courses
@@ -30,20 +29,20 @@ namespace LearningCenter.Domain.Models.Courses
             int nextOrder = _lessons.Count > 0 ? _lessons.Max(l => l.Order) + 1 : 1;
             if (lesson.Order != nextOrder)
             {
-                throw new InvalidLessonException($"Lesson order must be {nextOrder}.");
+                throw new InvalidChapterException($"Lesson order must be {nextOrder}.");
             }
             _lessons.Add(lesson);
         }
 
         private void Validate(string name, int order)
         {
-            Guard.ForStringLength<InvalidLessonException>(
+            Guard.ForStringLength<InvalidChapterException>(
                 name,
                 MinNameLength,
                 MaxNameLength,
                 nameof(this.Name));
 
-            Guard.AgainstOutOfRange<InvalidLessonException>(
+            Guard.AgainstOutOfRange<InvalidChapterException>(
                 order,
                 MinOrder,
                 MaxOrder,

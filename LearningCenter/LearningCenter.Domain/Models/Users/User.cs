@@ -33,7 +33,7 @@ namespace LearningCenter.Domain.Models.Users
 
         public void AddLessonCompleted(LessonCompleted lessonCompleted)
         {
-            if (LessonsCompleted.All(lc => lc.CompletedOn < lessonCompleted.CompletedOn))
+            if (LessonsCompleted.Any(lc => lc.CompletedOn > lessonCompleted.StartedOn))
             {
                 throw new InvalidUserException("New lesson completion should be in the future.");
             }

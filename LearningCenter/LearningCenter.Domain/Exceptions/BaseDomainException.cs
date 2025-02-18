@@ -2,12 +2,14 @@
 {
     public abstract class BaseDomainException : Exception
     {
-        private string? error;
+        public string Error { get; private set; }
 
-        public string Error
+        protected BaseDomainException(string message = "")
+            : base(message)
         {
-            get => this.error ?? base.Message;
-            set => this.error = value;
+            Error = message;
         }
+
+        public override string ToString() => Error;
     }
 }

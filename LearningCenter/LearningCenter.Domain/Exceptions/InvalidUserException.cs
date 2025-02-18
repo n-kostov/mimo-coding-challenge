@@ -5,7 +5,8 @@
         public InvalidUserException()
         {
         }
-
-        public InvalidUserException(string error) => this.Error = error;
+        public InvalidUserException(string error) : base(error)
+        {
+        }
     }
 }

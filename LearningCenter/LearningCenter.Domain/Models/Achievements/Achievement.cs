@@ -48,7 +48,7 @@ namespace LearningCenter.Domain.Models.Achievements
                 goal,
                 MinGoal,
                 MaxGoal,
-                nameof(this.Name));
+                nameof(this.Goal));
         }
 
         private void ValidateSpecificAchievement(string name, int targetId)

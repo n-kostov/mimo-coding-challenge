@@ -5,7 +5,8 @@
         public InvalidUserAchievementException()
         {
         }
-
-        public InvalidUserAchievementException(string error) => this.Error = error;
+        public InvalidUserAchievementException(string error) : base(error)
+        {
+        }
     }
 }

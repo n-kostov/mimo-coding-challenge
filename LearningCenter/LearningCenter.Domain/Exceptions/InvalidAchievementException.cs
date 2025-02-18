@@ -5,7 +5,8 @@
         public InvalidAchievementException()
         {
         }
-
-        public InvalidAchievementException(string error) => this.Error = error;
+        public InvalidAchievementException(string error) :base(error)
+        {
+        }
     }
 }

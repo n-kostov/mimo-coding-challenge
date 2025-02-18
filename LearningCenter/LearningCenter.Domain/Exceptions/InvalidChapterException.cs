@@ -5,7 +5,8 @@
         public InvalidChapterException()
         {
         }
-
-        public InvalidChapterException(string error) => this.Error = error;
+        public InvalidChapterException(string error) : base(error)
+        {
+        }   
     }
 }

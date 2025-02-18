@@ -6,7 +6,7 @@
         {
             public const int MinNameLength = 3;
             public const int MaxNameLength = 50;
-            public const int MinOrder = 0;
+            public const int MinOrder = 1;
             public const int MaxOrder = 100;
         }
 

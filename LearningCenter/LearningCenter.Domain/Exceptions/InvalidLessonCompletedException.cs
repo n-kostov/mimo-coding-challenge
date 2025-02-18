@@ -5,7 +5,8 @@
         public InvalidLessonCompletedException()
         {
         }
-
-        public InvalidLessonCompletedException(string error) => this.Error = error;
+        public InvalidLessonCompletedException(string error) : base(error)
+        {
+        }
     }
 }
