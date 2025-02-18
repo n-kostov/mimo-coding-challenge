@@ -7,7 +7,6 @@ namespace LearningCenter.Domain.Models.Courses
     public class Chapter : Entity<int>
     {
         public string Name { get; private set; }
-        public int CourseId { get; private set; }
         public int Order { get; private set; }
         private List<Lesson> _lessons = new();
         public IReadOnlyCollection<Lesson> Lessons => _lessons.AsReadOnly();
@@ -15,19 +14,18 @@ namespace LearningCenter.Domain.Models.Courses
         { 
         }
 
-        internal Chapter(string name, int courseId, int order) 
+        internal Chapter(string name, int order) 
         {
             Validate(name, order);
 
             Name = name;
-            CourseId = courseId; 
             Order = order; 
         }
 
         public void AddLesson(string name)
         {
             int nextOrder = _lessons.Count > 0 ? _lessons.Max(l => l.Order) + 1 : 1;
-            var lesson = new Lesson(name, this.Id, nextOrder);
+            var lesson = new Lesson(name, nextOrder);
             _lessons.Add(lesson);
         }
 

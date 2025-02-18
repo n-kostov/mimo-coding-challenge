@@ -20,11 +20,10 @@ namespace LearningCenter.Domain.Models.Courses
             int order = 5;
 
             // Act
-            var lesson = new Lesson(name, chapterId, order);
+            var lesson = new Lesson(name, order);
 
             // Assert
             lesson.Name.Should().Be(name);
-            lesson.ChapterId.Should().Be(chapterId);
             lesson.Order.Should().Be(order);
         }
 
@@ -35,11 +34,10 @@ namespace LearningCenter.Domain.Models.Courses
         public void CreateLesson_ShouldThrowInvalidLessonException_WhenNameIsInvalid(string invalidName)
         {
             // Arrange
-            int chapterId = 1;
             int order = 5;
 
             // Act
-            Action act = () => new Lesson(invalidName, chapterId, order);
+            Action act = () => new Lesson(invalidName, order);
 
             // Assert
             act.Should().Throw<InvalidLessonException>();
@@ -52,10 +50,9 @@ namespace LearningCenter.Domain.Models.Courses
         {
             // Arrange
             string name = "Valid Lesson Name";
-            int chapterId = 1;
 
             // Act
-            Action act = () => new Lesson(name, chapterId, invalidOrder);
+            Action act = () => new Lesson(name, invalidOrder);
 
             // Assert
             act.Should().Throw<InvalidLessonException>();

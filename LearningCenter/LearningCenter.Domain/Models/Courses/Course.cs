@@ -14,7 +14,7 @@ namespace LearningCenter.Domain.Models.Courses
         { 
         }
 
-        public Course(string name) 
+        internal Course(string name) 
         {
             Validate(name);
 
@@ -24,8 +24,19 @@ namespace LearningCenter.Domain.Models.Courses
         public void AddChapter(string name)
         {
             int nextOrder = _chapters.Count > 0 ? _chapters.Max(c => c.Order) + 1 : 1;
-            var chapter = new Chapter(name, this.Id, nextOrder);
+            var chapter = new Chapter(name, nextOrder);
             _chapters.Add(chapter);
+        }
+
+        public void AddLessonToChapter(int chapterId, string lessonName)
+        {
+            var chapter = _chapters.FirstOrDefault(c => c.Id == chapterId);
+            if (chapter == null)
+            {
+                throw new InvalidCourseException("Chapter not found.");
+            }
+
+            chapter.AddLesson(lessonName);
         }
 
         private void Validate(string name)

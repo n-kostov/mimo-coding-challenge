@@ -20,8 +20,9 @@ namespace LearningCenter.Infrastructure.Persistence.Configurations
 
             builder.HasMany(c => c.Lessons)
                 .WithOne()
-                .HasForeignKey(l => l.ChapterId)
-                .OnDelete(DeleteBehavior.Restrict); // Avoids SQLite foreign key issue
+                .HasForeignKey("ChapterId")
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.ToTable("Chapters");
         }

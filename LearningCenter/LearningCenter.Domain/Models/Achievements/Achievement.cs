@@ -15,7 +15,7 @@ namespace LearningCenter.Domain.Models.Achievements
         private Achievement() { }
 
         // General Achievement Constructor
-        public Achievement(string name, int goal, AchievementUnitType unitType)
+        internal Achievement(string name, int goal, AchievementUnitType unitType)
         {
             ValidateGeneralAchievement(name, goal);
 
@@ -26,7 +26,7 @@ namespace LearningCenter.Domain.Models.Achievements
         }
 
         // Specific Achievement Constructor
-        public Achievement(string name, AchievementUnitType unitType, int targetId)
+        internal Achievement(string name, AchievementUnitType unitType, int targetId)
         {
             ValidateSpecificAchievement(name, targetId);
 

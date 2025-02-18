@@ -14,7 +14,7 @@ namespace LearningCenter.Domain.Models.Users
         {
         }
 
-        public User(string name)
+        internal User(string name)
         {
             Validate(name);
 

@@ -7,18 +7,16 @@ namespace LearningCenter.Domain.Models.Courses
     public class Lesson : Entity<int>
     {
         public string Name { get; private set; }
-        public int ChapterId { get; private set; }
         public int Order { get; private set; }
         private Lesson() 
         { 
         }
 
-        internal Lesson(string name, int chapterId, int order) 
+        internal Lesson(string name, int order) 
         {
             Validate(name, order);
 
             Name = name;
-            ChapterId = chapterId;
             Order = order; 
         }
 

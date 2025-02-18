@@ -7,51 +7,77 @@ namespace LearningCenter.Domain.Models.Courses
     public class CourseSpecs
     {
         [Fact]
-        public void Course_Should_Be_Created_With_Valid_Name()
+        public void Constructor_ShouldCreateCourse_WhenNameIsValid()
         {
             // Arrange
-            string validName = "C# Fundamentals";
+            var courseName = "C# Fundamentals";
 
             // Act
-            var course = new Course(validName);
+            var course = new Course(courseName);
 
             // Assert
-            course.Name.Should().Be(validName);
+            course.Name.Should().Be(courseName);
             course.Chapters.Should().BeEmpty();
         }
 
         [Fact]
-        public void AddChapter_ShouldAddChapter_WhenValidChapterProvided()
+        public void Constructor_ShouldThrowException_WhenNameIsInvalid()
+        {
+            // Arrange
+            var invalidName = "";
+
+            // Act
+            Action act = () => new Course(invalidName);
+
+            // Assert
+            act.Should().Throw<InvalidCourseException>();
+        }
+
+        [Fact]
+        public void AddChapter_ShouldAddChapterWithCorrectOrder()
         {
             // Arrange
             var course = new Course("C# Fundamentals");
 
             // Act
             course.AddChapter("Introduction");
-
-            // Assert
-            course.Chapters.Should().ContainSingle();
-            course.Chapters.First().Name.Should().Be("Introduction");
-            course.Chapters.First().Order.Should().Be(1);
-            course.Chapters.First().CourseId.Should().Be(course.Id);
-        }
-
-        [Fact]
-        public void AddChapter_ShouldAddChaptersInOrder_WhenValidChaptersProvided()
-        {
-            // Arrange
-            var course = new Course("C#");
-
-            // Act
-            course.AddChapter("Introduction");
-            course.AddChapter("OOP");
+            course.AddChapter("Advanced Topics");
 
             // Assert
             course.Chapters.Should().HaveCount(2);
-            course.Chapters.First().Name.Should().Be("Introduction");
-            course.Chapters.First().Order.Should().Be(1);
-            course.Chapters.Last().Name.Should().Be("OOP");
-            course.Chapters.Last().Order.Should().Be(2);
+            course.Chapters.ElementAt(0).Order.Should().Be(1);
+            course.Chapters.ElementAt(1).Order.Should().Be(2);
+        }
+
+        [Fact]
+        public void AddLessonToChapter_ShouldAddLessonToExistingChapter()
+        {
+            // Arrange
+            var course = new Course("C# Fundamentals");
+            course.AddChapter("Introduction");
+            var chapterId = course.Chapters.First().Id;
+
+            // Act
+            course.AddLessonToChapter(chapterId, "Hello World");
+
+            // Assert
+            var chapter = course.Chapters.First();
+            chapter.Lessons.Should().HaveCount(1);
+            chapter.Lessons.First().Name.Should().Be("Hello World");
+        }
+
+        [Fact]
+        public void AddLessonToChapter_ShouldThrowException_WhenChapterDoesNotExist()
+        {
+            // Arrange
+            var course = new Course("C# Fundamentals");
+            var nonExistentChapterId = 999;
+
+            // Act
+            Action act = () => course.AddLessonToChapter(nonExistentChapterId, "Hello World");
+
+            // Assert
+            act.Should().Throw<InvalidCourseException>().WithMessage("Chapter not found.");
         }
     }
 }

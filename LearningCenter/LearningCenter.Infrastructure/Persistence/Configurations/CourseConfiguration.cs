@@ -17,8 +17,9 @@ namespace LearningCenter.Infrastructure.Persistence.Configurations
 
             builder.HasMany(c => c.Chapters)
                 .WithOne()
-                .HasForeignKey(c => c.CourseId)
-                .OnDelete(DeleteBehavior.Restrict); // SQLite does not support Cascade Delete
+                .HasForeignKey("CourseId")
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.ToTable("Courses");
         }
