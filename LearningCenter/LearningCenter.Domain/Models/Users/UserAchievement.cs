@@ -4,7 +4,7 @@ using static LearningCenter.Domain.Models.ModelConstants.UserAchievement;
 
 namespace LearningCenter.Domain.Models.Users
 {
-    public class UserAchievement : ValueObject
+    public class UserAchievement : Entity<int>
     {
         public int AchievementId { get; private set; }
         public bool IsCompleted { get; private set; }
@@ -21,11 +21,13 @@ namespace LearningCenter.Domain.Models.Users
             Progress = progress;
         }
 
-        protected override IEnumerable<object> GetEqualityComponents()
+        public void UpdateProgress(bool isCompleted)
         {
-            yield return AchievementId;
-            yield return IsCompleted;
-            yield return Progress;
+            int newProgress = Progress + 1;
+            Validate(newProgress);
+
+            IsCompleted = isCompleted;
+            Progress = newProgress;
         }
 
         private void Validate(int progress)

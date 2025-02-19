@@ -18,12 +18,14 @@ namespace LearningCenter.Infrastructure.Persistence.Configurations
             builder.OwnsMany(u => u.Achievements, a =>
             {
                 a.WithOwner();
+                a.HasKey(p => p.Id);
                 a.Property(p => p.AchievementId).IsRequired();
             });
 
             builder.OwnsMany(u => u.LessonsCompleted, lc =>
             {
                 lc.WithOwner();
+                lc.HasKey("Id");
                 lc.Property(p => p.LessonId).IsRequired();
             });
 

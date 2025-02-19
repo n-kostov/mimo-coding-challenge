@@ -1,29 +1,24 @@
-using LearningCenter.Domain.Models.Users;
+using LearningCenter.Application.Features.Commands;
+using LearningCenter.Application.Features.Queries;
+using LearningCenter.Web.Controllers;
 using Microsoft.AspNetCore.Mvc;
 
 namespace LearningCenter.Controllers
 {
-    [ApiController]
-    [Route("[controller]")]
-    public class UserController : ControllerBase
+    public class UserController : ApiController
     {
-        private static readonly User user = new User("John Doe");
 
         [HttpPost("complete-lesson")]
-        public async Task<IActionResult> CompleteLesson(int userId, [FromBody] object request)
+        public async Task<IActionResult> CompleteLesson([FromBody] CompleteLessonCommand completeLessonCommand)
         {
-            user.AddLessonCompleted(1, DateTime.UtcNow, DateTime.UtcNow.AddHours(1));
-
-            return Ok();
+            return await Send(completeLessonCommand);
         }
 
         [HttpGet("achievements")]
-        public async Task<IActionResult> GetUserAchievements(int userId)
+        public async Task<ActionResult<GetUserAchievementsOutputModel>> GetUserAchievements([FromQuery] GetUserAchievementsQuery query)
         {
-            user.AddAchievement(1, true, 100);
-            user.AddAchievement(2, false, 3);
-
-            return Ok(user.Achievements);
+            query.UserId = 1;
+            return await Send(query);
         }
     }
 }

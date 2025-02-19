@@ -1,4 +1,5 @@
-﻿using LearningCenter.Application.Contracts;
+﻿using LearningCenter.Application.Features;
+using LearningCenter.Application.Features.Services;
 using LearningCenter.Infrastructure.Persistence;
 using LearningCenter.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -18,6 +19,9 @@ namespace LearningCenter.Infrastructure
                         configuration.GetConnectionString("DefaultConnection"),
                         b => b.MigrationsAssembly(typeof(LearningCenterDbContext).Assembly.FullName)))
                 .AddTransient<IInitializer, LearningCenterDbInitializer>()
-                .AddTransient(typeof(IRepository<>), typeof(DataRepository<>));
+                .AddTransient<IUserRepository, UserRepository>()
+                .AddTransient<IAchievementRepository, AchievementRepository>()
+                .AddTransient<ICourseRepository, CourseRepository>()
+                .AddTransient<IUserAchievementService, UserAchievementService>();
     }
 }

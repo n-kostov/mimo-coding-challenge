@@ -1,7 +1,7 @@
-﻿using LearningCenter.Domain.Models.Achievements;
+﻿using LearningCenter.Domain.Common;
+using LearningCenter.Domain.Models.Achievements;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using static LearningCenter.Domain.Models.ModelConstants.Common;
 
 namespace LearningCenter.Infrastructure.Persistence.Configurations
@@ -19,13 +19,11 @@ namespace LearningCenter.Infrastructure.Persistence.Configurations
             builder.Property(a => a.Goal)
                 .IsRequired();
 
-            var unitTypeConverter = new ValueConverter<AchievementUnitType, string>(
-                v => v.ToString(),
-                v => (AchievementUnitType)Enum.Parse(typeof(AchievementUnitType), v)
-            );
-
             builder.Property(a => a.UnitType)
-                .HasConversion(unitTypeConverter)
+                .HasConversion(
+                    v => v.Name,  // Convert to string when saving
+                    v => Enumeration.FromName<AchievementUnitType>(v) // Convert back when reading
+                )
                 .IsRequired();
 
             builder.Property(a => a.TargetId)
