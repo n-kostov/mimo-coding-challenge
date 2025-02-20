@@ -3,6 +3,7 @@ using LearningCenter.Domain;
 using LearningCenter.Infrastructure;
 using LearningCenter.Web;
 using LearningCenter.Web.Middleware;
+using LearningCenter.Web.SchemaFilters;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,7 +18,11 @@ builder.Services.AddValidation();
 
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+builder.Services.AddSwaggerGen(options =>
+{
+    options.SwaggerDoc("v1", new() { Title = "LearningCenter API", Version = "v1" });
+    options.SchemaFilter<CompleteLessonCommandSchemaFilter>();
+});
 
 var app = builder.Build();
 
