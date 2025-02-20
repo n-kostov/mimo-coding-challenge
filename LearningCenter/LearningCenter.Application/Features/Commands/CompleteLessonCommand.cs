@@ -1,5 +1,4 @@
-﻿using LearningCenter.Application.Features.Events;
-using MediatR;
+﻿using MediatR;
 
 namespace LearningCenter.Application.Features.Commands
 {
