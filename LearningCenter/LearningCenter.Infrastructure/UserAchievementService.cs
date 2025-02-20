@@ -53,7 +53,8 @@ namespace LearningCenter.Infrastructure
                 }
             }
 
-            HandleGenericAchievements(user, lessonAchievements.Where(a => !a.TargetId.HasValue), timesCompletedLesson);
+            var completedLessons = user.LessonsCompleted.Select(l => l.LessonId).Distinct().Count();
+            HandleGenericAchievements(user, lessonAchievements.Where(a => !a.TargetId.HasValue), completedLessons);
         }
 
         private void HandleChapterAchievements(User user, IEnumerable<Achievement> achievements, Course course)

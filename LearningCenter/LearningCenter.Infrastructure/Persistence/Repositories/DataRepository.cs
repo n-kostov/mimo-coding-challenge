@@ -6,7 +6,7 @@ namespace LearningCenter.Infrastructure.Persistence.Repositories
     internal abstract class DataRepository<TEntity> : IRepository<TEntity>
         where TEntity : class, IAggregateRoot
     {
-        private readonly LearningCenterDbContext db;
+        protected readonly LearningCenterDbContext db;
 
         protected DataRepository(LearningCenterDbContext db) => this.db = db;
 
