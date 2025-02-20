@@ -90,6 +90,7 @@ namespace LearningCenter.Domain.Models.Users
             var user = new User("John Doe");
             user.AddLessonCompleted(1, DateTime.UtcNow.AddHours(-24), DateTime.UtcNow.AddHours(-20));
             user.AddLessonCompleted(2, DateTime.UtcNow.AddHours(1), DateTime.UtcNow.AddHours(2));
+            user.AddLessonCompleted(3, DateTime.UtcNow.AddHours(1), DateTime.UtcNow.AddHours(2));
 
             // Act
             Action act = () => user.AddLessonCompleted(3, DateTime.UtcNow.AddHours(-1), DateTime.UtcNow);

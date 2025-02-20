@@ -1,4 +1,4 @@
-﻿namespace LearningCenter.Application.Features.Services
+﻿namespace LearningCenter.Application.Contracts
 {
     public interface IUserAchievementService
     {

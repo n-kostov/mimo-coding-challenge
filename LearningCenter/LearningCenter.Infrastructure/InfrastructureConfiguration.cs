@@ -1,5 +1,4 @@
 ﻿using LearningCenter.Application.Features;
-using LearningCenter.Application.Features.Services;
 using LearningCenter.Infrastructure.Persistence;
 using LearningCenter.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -21,7 +20,6 @@ namespace LearningCenter.Infrastructure
                 .AddTransient<IInitializer, LearningCenterDbInitializer>()
                 .AddTransient<IUserRepository, UserRepository>()
                 .AddTransient<IAchievementRepository, AchievementRepository>()
-                .AddTransient<ICourseRepository, CourseRepository>()
-                .AddTransient<IUserAchievementService, UserAchievementService>();
+                .AddTransient<ICourseRepository, CourseRepository>();
     }
 }

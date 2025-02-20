@@ -1,4 +1,4 @@
-﻿using LearningCenter.Application.Features.Services;
+﻿using LearningCenter.Application.Contracts;
 using MediatR;
 
 namespace LearningCenter.Application.Features.Events

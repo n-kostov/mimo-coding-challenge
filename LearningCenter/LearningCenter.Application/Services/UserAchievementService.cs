@@ -1,11 +1,11 @@
-﻿using LearningCenter.Application.Features;
-using LearningCenter.Application.Features.Services;
+﻿using LearningCenter.Application.Contracts;
+using LearningCenter.Application.Features;
 using LearningCenter.Domain.Exceptions;
 using LearningCenter.Domain.Models.Achievements;
 using LearningCenter.Domain.Models.Courses;
 using LearningCenter.Domain.Models.Users;
 
-namespace LearningCenter.Infrastructure
+namespace LearningCenter.Application.Services
 {
     public class UserAchievementService : IUserAchievementService
     {
