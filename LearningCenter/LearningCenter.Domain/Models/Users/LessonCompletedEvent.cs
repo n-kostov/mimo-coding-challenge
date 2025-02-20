@@ -1,7 +1,7 @@
 ﻿using LearningCenter.Domain.Common;
 using MediatR;
 
-namespace LearningCenter.Application.Features.Events
+namespace LearningCenter.Domain.Models.Users
 {
     public class LessonCompletedEvent : BaseDomainEvent, INotification
     {

@@ -1,4 +1,5 @@
 ﻿using LearningCenter.Application.Contracts;
+using LearningCenter.Domain.Models.Users;
 using MediatR;
 
 namespace LearningCenter.Application.Features.Events

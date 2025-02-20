@@ -32,8 +32,6 @@ namespace LearningCenter.Application.Features.Commands
                 user.AddLessonCompleted(request.LessonId, request.StartedOn, request.CompletedOn);
                 await _userRepository.SaveChangesAsync();
 
-                await _mediator.Publish(new LessonCompletedEvent(user.Id, request.LessonId, DateTime.UtcNow));
-
                 return Result.Success;
             }
         }

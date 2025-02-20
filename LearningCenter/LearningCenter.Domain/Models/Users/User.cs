@@ -7,8 +7,10 @@ namespace LearningCenter.Domain.Models.Users
     public class User : Entity<int>, IAggregateRoot
     {
         public string Name { get; private set; }
-        public List<UserAchievement> Achievements { get; private set; } = new();
-        public List<LessonCompleted> LessonsCompleted { get; private set; } = new();
+        private List<UserAchievement> _achievements = new();
+        private List<LessonCompleted> _lessonsCompleted = new();
+        public IReadOnlyCollection<UserAchievement> Achievements => _achievements.AsReadOnly();
+        public IReadOnlyCollection<LessonCompleted> LessonsCompleted => _lessonsCompleted.AsReadOnly();
 
         private User() 
         {
@@ -24,23 +26,24 @@ namespace LearningCenter.Domain.Models.Users
         public void AddAchievement(int achievementId, bool isCompleted, int progress)
         {
             var achievement = new UserAchievement(achievementId, isCompleted, progress);
-            if (Achievements.Any(a => a.AchievementId == achievement.AchievementId))
+            if (_achievements.Any(a => a.AchievementId == achievement.AchievementId))
             {
                 throw new InvalidUserException("Achievement already exists for this user.");
             }
 
-            Achievements.Add(achievement);
+            _achievements.Add(achievement);
         }
 
         public void AddLessonCompleted(int lessonId, DateTime startedOn, DateTime completedOn)
         {
             var lessonCompleted = new LessonCompleted(lessonId, startedOn, completedOn);
-            if (LessonsCompleted.Any(lc => lc.LessonId == lessonId && lc.CompletedOn > lessonCompleted.StartedOn))
+            if (_lessonsCompleted.Any(lc => lc.LessonId == lessonId && lc.CompletedOn > lessonCompleted.StartedOn))
             {
                 throw new InvalidUserException("New lesson completion should be in the future.");
             }
 
-            LessonsCompleted.Add(lessonCompleted);
+            _lessonsCompleted.Add(lessonCompleted);
+            AddDomainEvent(new LessonCompletedEvent(Id, lessonId, DateTime.UtcNow));
         }
 
         private void Validate(string name)
