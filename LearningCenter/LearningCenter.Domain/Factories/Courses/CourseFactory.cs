@@ -42,6 +42,8 @@ namespace LearningCenter.Domain.Factories.Courses
                 course.AddChapter(chapter);
             }
 
+            _chapters.Clear();
+
             return course;
         }
     }

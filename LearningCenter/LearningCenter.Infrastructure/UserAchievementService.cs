@@ -98,6 +98,11 @@ namespace LearningCenter.Infrastructure
 
         private void HandleGenericAchievements(User user, IEnumerable<Achievement> genericAchievements, int progressIncrement)
         {
+            if (progressIncrement <= 0)
+            {
+                return;
+            }
+
             foreach (var achievement in genericAchievements)
             {
                 var userAchievement = user.Achievements.FirstOrDefault(a => a.AchievementId == achievement.Id);
@@ -108,18 +113,18 @@ namespace LearningCenter.Infrastructure
                 }
                 else if (!userAchievement.IsCompleted)
                 {
-                    userAchievement.UpdateProgress(userAchievement.Progress + progressIncrement >= achievement.Goal);
+                    userAchievement.UpdateProgress(progressIncrement >= achievement.Goal);
                 }
             }
         }
 
         private int FindCompletedChapters(User user, Course course)
         {
-            var lessonsInUnit = course.Chapters.SelectMany(c => c.Lessons).Select(l => l.Id);
+            var lessonsPerChapter = course.Chapters.GroupBy(ch => ch.Id, c => c.Lessons.Select(l => l.Id));
 
-            if (lessonsInUnit == null || !lessonsInUnit.Any()) return 0;
+            if (lessonsPerChapter == null) return 0;
 
-            return lessonsInUnit.Count(l => user.LessonsCompleted.Any(lc => lc.LessonId == l));
+            return lessonsPerChapter.Count(ch => ch.SelectMany(l => l).All(lessonId => user.LessonsCompleted.Any(lc => lc.LessonId == lessonId)));
         }
 
         private int FindCompletedCourses(User user, IEnumerable<Course> courses)

@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace LearningCenter.Infrastructure.Persistence
 {
-    internal class LearningCenterDbContext : DbContext
+    public class LearningCenterDbContext : DbContext
     {
         public LearningCenterDbContext(DbContextOptions<LearningCenterDbContext> options)
             : base(options)

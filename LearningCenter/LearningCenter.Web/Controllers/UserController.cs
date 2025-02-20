@@ -17,7 +17,7 @@ namespace LearningCenter.Controllers
         [HttpGet("achievements")]
         public async Task<ActionResult<GetUserAchievementsOutputModel>> GetUserAchievements([FromQuery] GetUserAchievementsQuery query)
         {
-            query.UserId = 1;
+            ////query.UserId = 1;
             return await Send(query);
         }
     }

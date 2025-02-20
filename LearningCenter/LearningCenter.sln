@@ -9,7 +9,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningCenter.Domain", "Le
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningCenter.Infrastructure", "LearningCenter.Infrastructure\LearningCenter.Infrastructure.csproj", "{CD517403-0171-4D42-A70B-AFF3967B9A48}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearningCenter.Application", "LearningCenter.Application\LearningCenter.Application.csproj", "{AB9E6836-26F8-402E-A619-CA3C5E6FA95C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LearningCenter.Application", "LearningCenter.Application\LearningCenter.Application.csproj", "{AB9E6836-26F8-402E-A619-CA3C5E6FA95C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LearningCenter.Tests", "LearningCenter.Tests\LearningCenter.Tests.csproj", "{934DD44B-1BB0-45B9-9ED4-F42936C4B671}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{AB9E6836-26F8-402E-A619-CA3C5E6FA95C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AB9E6836-26F8-402E-A619-CA3C5E6FA95C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AB9E6836-26F8-402E-A619-CA3C5E6FA95C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{934DD44B-1BB0-45B9-9ED4-F42936C4B671}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{934DD44B-1BB0-45B9-9ED4-F42936C4B671}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{934DD44B-1BB0-45B9-9ED4-F42936C4B671}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{934DD44B-1BB0-45B9-9ED4-F42936C4B671}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

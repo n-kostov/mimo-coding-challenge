@@ -35,7 +35,7 @@ namespace LearningCenter.Domain.Models.Users
         public void AddLessonCompleted(int lessonId, DateTime startedOn, DateTime completedOn)
         {
             var lessonCompleted = new LessonCompleted(lessonId, startedOn, completedOn);
-            if (LessonsCompleted.Any(lc => lc.CompletedOn > lessonCompleted.StartedOn))
+            if (LessonsCompleted.Any(lc => lc.LessonId == lessonId && lc.CompletedOn > lessonCompleted.StartedOn))
             {
                 throw new InvalidUserException("New lesson completion should be in the future.");
             }
