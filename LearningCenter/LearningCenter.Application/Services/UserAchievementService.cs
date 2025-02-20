@@ -34,9 +34,12 @@ namespace LearningCenter.Application.Services
             var timesCompletedLesson = user.LessonsCompleted.Count(l => l.LessonId == lessonId);
             var lessonCourse = courses.FirstOrDefault(c => c.Chapters.Any(ch => ch.Lessons.Any(l => l.Id == lessonId)));
 
-            HandleLessonAchievements(user, achievements, lessonId, timesCompletedLesson);
-            HandleChapterAchievements(user, achievements, lessonCourse);
-            HandleCourseAchievements(user, achievements, lessonCourse, courses);
+            if (lessonCourse != null)
+            {
+                HandleLessonAchievements(user, achievements, lessonId, timesCompletedLesson);
+                HandleChapterAchievements(user, achievements, lessonCourse);
+                HandleCourseAchievements(user, achievements, lessonCourse, courses);
+            }
 
             await _userRepository.SaveChangesAsync();
         }
