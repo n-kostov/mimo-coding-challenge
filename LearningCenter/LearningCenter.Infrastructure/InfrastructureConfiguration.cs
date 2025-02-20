@@ -20,6 +20,7 @@ namespace LearningCenter.Infrastructure
                 .AddTransient<IInitializer, LearningCenterDbInitializer>()
                 .AddTransient<IUserRepository, UserRepository>()
                 .AddTransient<IAchievementRepository, AchievementRepository>()
-                .AddTransient<ICourseRepository, CourseRepository>();
+                .AddTransient<ICourseRepository, CourseRepository>()
+                .AddScoped<IDatabaseSeeder, DatabaseSeeder>();
     }
 }

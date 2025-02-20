@@ -1,19 +1,40 @@
 ﻿using FluentAssertions;
 using LearningCenter.Application.Features.Commands;
 using LearningCenter.Application.Features.Queries;
+using LearningCenter.Infrastructure.Persistence;
 using LearningCenter.Tests.Common;
+using Microsoft.Extensions.DependencyInjection;
 using System.Text;
 using System.Text.Json;
 
 namespace LearningCenter.Tests.Controllers
 {
-    public class UserControllerTests : IClassFixture<CustomWebApplicationFactory>
+    public class UserControllerTests : IClassFixture<CustomWebApplicationFactory>, IAsyncLifetime
     {
         private readonly HttpClient _client;
+        private readonly IServiceScope _scope;
+        private readonly LearningCenterDbContext _dbContext;
+        private readonly IDatabaseSeeder _seeder;
 
         public UserControllerTests(CustomWebApplicationFactory factory)
         {
             _client = factory.CreateClient();
+            _scope = factory.Services.CreateScope();
+            _dbContext = _scope.ServiceProvider.GetRequiredService<LearningCenterDbContext>();
+            _seeder = _scope.ServiceProvider.GetRequiredService<IDatabaseSeeder>();
+        }
+
+        public async Task InitializeAsync()
+        {
+            _dbContext.Database.EnsureCreatedAsync();
+            _seeder.Seed();
+        }
+
+        public async Task DisposeAsync()
+        {
+            await _dbContext.Database.EnsureDeletedAsync();
+            _scope.Dispose();
+            return;
         }
 
         private async Task CompleteLessonAsync(int userId, int lessonId)

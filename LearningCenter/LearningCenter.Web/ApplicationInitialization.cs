@@ -1,4 +1,5 @@
 ﻿using LearningCenter.Infrastructure;
+using LearningCenter.Infrastructure.Persistence;
 
 namespace LearningCenter.Web
 {
@@ -14,6 +15,9 @@ namespace LearningCenter.Web
             {
                 initializer.Initialize();
             }
+
+            var databaseSeeder = serviceScope.ServiceProvider.GetRequiredService<IDatabaseSeeder>();
+            databaseSeeder.Seed();
 
             return app;
         }
