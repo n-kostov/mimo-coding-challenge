@@ -37,21 +37,23 @@ namespace LearningCenter.Tests.Controllers
             return;
         }
 
-        private async Task CompleteLessonAsync(int userId, int lessonId)
+        [Fact]
+        public async Task CompleteLesson_ShouldReturnValidationError_WhenLessonDoesNotExist()
         {
-            var command = new CompleteLessonCommand(userId, lessonId, new DateTime(2025, 2, 15), new DateTime(2025, 2, 16));
+            // Arrange
+            var invalidLessonId = 999;
+
+            var command = new CompleteLessonCommand(1, invalidLessonId, new DateTime(2025, 2, 15), new DateTime(2025, 2, 16));
             var content = new StringContent(JsonSerializer.Serialize(command), Encoding.UTF8, "application/json");
+
+            // Act
             var response = await _client.PostAsync("/api/user/complete-lesson", content);
-            response.EnsureSuccessStatusCode();
-        }
 
-        private async Task<GetUserAchievementsOutputModel> GetUserAchievementsAsync(int userId)
-        {
-            var response = await _client.GetAsync($"/api/user/achievements?UserId={userId}");
-            response.EnsureSuccessStatusCode();
+            // Assert
+            response.StatusCode.Should().Be(System.Net.HttpStatusCode.BadRequest);
 
-            var json = await response.Content.ReadAsStringAsync();
-            return JsonSerializer.Deserialize<GetUserAchievementsOutputModel>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
+            var responseContent = await response.Content.ReadAsStringAsync();
+            responseContent.Should().Contain("Lesson with the provided id does not exist");
         }
 
         [Fact]
@@ -113,6 +115,23 @@ namespace LearningCenter.Tests.Controllers
             achievements = await GetUserAchievementsAsync(userId);
             achievements.UserAchievements.Should().Contain(a => a.Name == "Complete the Swift course" && a.IsCompleted);
             achievements.UserAchievements.Should().Contain(a => a.Name == "Complete the C# course" && a.IsCompleted);
+        }
+
+        private async Task CompleteLessonAsync(int userId, int lessonId)
+        {
+            var command = new CompleteLessonCommand(userId, lessonId, new DateTime(2025, 2, 15), new DateTime(2025, 2, 16));
+            var content = new StringContent(JsonSerializer.Serialize(command), Encoding.UTF8, "application/json");
+            var response = await _client.PostAsync("/api/user/complete-lesson", content);
+            response.EnsureSuccessStatusCode();
+        }
+
+        private async Task<GetUserAchievementsOutputModel> GetUserAchievementsAsync(int userId)
+        {
+            var response = await _client.GetAsync($"/api/user/achievements?UserId={userId}");
+            response.EnsureSuccessStatusCode();
+
+            var json = await response.Content.ReadAsStringAsync();
+            return JsonSerializer.Deserialize<GetUserAchievementsOutputModel>(json, new JsonSerializerOptions { PropertyNameCaseInsensitive = true })!;
         }
     }
 }

@@ -18,5 +18,10 @@ namespace LearningCenter.Infrastructure.Persistence.Repositories
                     .ThenInclude(ch => ch.Lessons)
                 .ToListAsync();
         }
+
+        public async Task<bool> DoesLessonExistAsync(int lessonId)
+        {
+            return await this.db.Lessons.AnyAsync(l => l.Id == lessonId);
+        }
     }
 }
