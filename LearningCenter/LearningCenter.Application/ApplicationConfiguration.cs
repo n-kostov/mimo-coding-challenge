@@ -13,6 +13,6 @@ namespace LearningCenter.Application
             => services
                 .AddMediatR(c => c.RegisterServicesFromAssembly(Assembly.GetExecutingAssembly()))
                 .AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>))
-                .AddTransient<IUserAchievementService, UserAchievementService>();
+                .AddScoped<IUserAchievementService, UserAchievementService>();
     }
 }

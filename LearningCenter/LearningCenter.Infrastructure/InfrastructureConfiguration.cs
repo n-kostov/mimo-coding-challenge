@@ -17,10 +17,10 @@ namespace LearningCenter.Infrastructure
                     .UseSqlite(
                         configuration.GetConnectionString("DefaultConnection"),
                         b => b.MigrationsAssembly(typeof(LearningCenterDbContext).Assembly.FullName)))
-                .AddTransient<IInitializer, LearningCenterDbInitializer>()
-                .AddTransient<IUserRepository, UserRepository>()
-                .AddTransient<IAchievementRepository, AchievementRepository>()
-                .AddTransient<ICourseRepository, CourseRepository>()
+                .AddScoped<IInitializer, LearningCenterDbInitializer>()
+                .AddScoped<IUserRepository, UserRepository>()
+                .AddScoped<IAchievementRepository, AchievementRepository>()
+                .AddScoped<ICourseRepository, CourseRepository>()
                 .AddScoped<IDatabaseSeeder, DatabaseSeeder>();
     }
 }
