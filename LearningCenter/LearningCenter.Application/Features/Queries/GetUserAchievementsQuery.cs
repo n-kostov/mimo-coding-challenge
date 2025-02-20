@@ -17,7 +17,7 @@ namespace LearningCenter.Application.Features.Queries
 
             public async Task<GetUserAchievementsOutputModel> Handle(GetUserAchievementsQuery request, CancellationToken cancellationToken)
             {
-                var userAchievements = await _userRepository.GetUserAchievements(request.UserId);
+                var userAchievements = await _userRepository.GetUserAchievementsAsync(request.UserId);
                 return new GetUserAchievementsOutputModel(userAchievements);
             }
         }

@@ -11,11 +11,12 @@ namespace LearningCenter.Infrastructure.Persistence.Repositories
         {
         }
 
-        public IEnumerable<Course> GetAll()
+        public async Task<IEnumerable<Course>> GetAllAsync()
         {
-            return this.All()
+            return await this.All()
                 .Include(c => c.Chapters)
-                    .ThenInclude(ch => ch.Lessons);
+                    .ThenInclude(ch => ch.Lessons)
+                .ToListAsync();
         }
     }
 }

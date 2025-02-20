@@ -1,5 +1,6 @@
 ﻿using LearningCenter.Application.Features;
 using LearningCenter.Domain.Models.Achievements;
+using Microsoft.EntityFrameworkCore;
 
 namespace LearningCenter.Infrastructure.Persistence.Repositories
 {
@@ -10,9 +11,9 @@ namespace LearningCenter.Infrastructure.Persistence.Repositories
         {
         }
 
-        public IEnumerable<Achievement> GetAll()
+        public async Task<IEnumerable<Achievement>> GetAllAsync()
         {
-            return this.All().ToList();
+            return await this.All().ToListAsync();
         }
     }
 }

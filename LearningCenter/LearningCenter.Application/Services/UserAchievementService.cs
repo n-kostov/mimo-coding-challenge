@@ -29,8 +29,8 @@ namespace LearningCenter.Application.Services
             var user = await _userRepository.FindByIdAsync(userId)
                        ?? throw new InvalidUserException(UserNotFoundErrorMessage);
 
-            var achievements = _achievementRepository.GetAll();
-            var courses = _courseRepository.GetAll();
+            var achievements = await _achievementRepository.GetAllAsync();
+            var courses = await _courseRepository.GetAllAsync();
             var timesCompletedLesson = user.LessonsCompleted.Count(l => l.LessonId == lessonId);
             var lessonCourse = courses.FirstOrDefault(c => c.Chapters.Any(ch => ch.Lessons.Any(l => l.Id == lessonId)));
 

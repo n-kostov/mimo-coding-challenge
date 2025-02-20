@@ -5,6 +5,6 @@ namespace LearningCenter.Application.Features
 {
     public interface IAchievementRepository : IRepository<Achievement>
     {
-        IEnumerable<Achievement> GetAll();
+        Task<IEnumerable<Achievement>> GetAllAsync();
     }
 }

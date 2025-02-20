@@ -5,6 +5,6 @@ namespace LearningCenter.Application.Features
 {
     public interface ICourseRepository : IRepository<Course>
     {
-        IEnumerable<Course> GetAll();
+        Task<IEnumerable<Course>> GetAllAsync();
     }
 }

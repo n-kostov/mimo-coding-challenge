@@ -18,7 +18,7 @@ namespace LearningCenter.Infrastructure.Persistence.Repositories
                 .FirstOrDefaultAsync(u => u.Id == userId);
         }
 
-        public async Task<IEnumerable<UserAchievementListingModel>> GetUserAchievements(int userId)
+        public async Task<IEnumerable<UserAchievementListingModel>> GetUserAchievementsAsync(int userId)
         {
             return await this.All()
                 .Where(u => u.Id == userId)

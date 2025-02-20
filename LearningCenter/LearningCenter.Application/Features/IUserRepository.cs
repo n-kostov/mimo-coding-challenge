@@ -7,7 +7,7 @@ namespace LearningCenter.Application.Features
     public interface IUserRepository : IRepository<User>
     {
         Task<User> FindByIdAsync(int userId);
-        Task<IEnumerable<UserAchievementListingModel>> GetUserAchievements(int userId);
+        Task<IEnumerable<UserAchievementListingModel>> GetUserAchievementsAsync(int userId);
 
         Task SaveChangesAsync();
     }
