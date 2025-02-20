@@ -1,0 +1,108 @@
+# OS-specific files
+####################
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+*.lnk
+
+# Visual Studio
+####################
+.vscode/
+.vs/
+.vscode/settings.json
+
+# Build Folders
+####################
+bin/
+obj/
+out/
+
+# User-specific files
+####################
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# ASP.NET Core
+####################
+appsettings*.json
+appsettings*.Development.json
+appsettings*.Local.json
+secrets.json
+
+# SQLite database
+####################
+*.db
+*.sqlite
+*.sqlite3
+
+# EF Core Migrations
+####################
+Migrations/
+
+# Logs, Temporary & Backup files
+####################
+*.log
+*.tlog
+*.pdb
+*.bak
+*.swp
+*.tmp
+*.temp
+*.pid
+*.gz
+*.diff
+
+# Package Management
+####################
+*.nupkg
+*.snupkg
+packages/
+.nuget/
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+# Test Results
+####################
+TestResults/
+coverage/
+*.coverage
+*.coveragexml
+*.testresults
+.trx
+
+# Tooling
+####################
+.idea/
+.resharper/
+*.DotSettings.user
+*.sln.iml
+
+# JetBrains Rider
+####################
+.idea/
+.idea/*
+
+# Resharper
+####################
+*.DotSettings.user
+
+# NCrunch
+####################
+*_ncrunch_*
+.*crunch*.local.xml
+
+# SonarQube
+####################
+.sonarqube
+
+# Others
+####################
+*.lock.json
