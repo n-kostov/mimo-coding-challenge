@@ -62,8 +62,8 @@ namespace LearningCenter.Tests.Controllers
             var achievements = await GetUserAchievementsAsync(userId);
 
             achievements.Should().NotBeNull();
-            achievements.UserAchievements.Should().NotContain(a => a.Id == 1); // Complete 5 lessons
-            achievements.UserAchievements.Should().NotContain(a => a.Id == 4); // Complete 1 chapter
+            achievements.UserAchievements.Should().NotContain(a => a.Name == "Complete 5 lessons");
+            achievements.UserAchievements.Should().NotContain(a => a.Name == "Complete 1 chapter");
 
             await CompleteLessonAsync(userId, 1); // Variables
             await CompleteLessonAsync(userId, 2); // Data Types
@@ -71,8 +71,8 @@ namespace LearningCenter.Tests.Controllers
             achievements = await GetUserAchievementsAsync(userId);
 
             achievements.Should().NotBeNull();
-            achievements.UserAchievements.Should().Contain(a => a.Id == 1 && !a.IsCompleted && a.Progress == 2); // Complete 5 lessons
-            achievements.UserAchievements.Should().Contain(a => a.Id == 4 && a.IsCompleted && a.Progress == 1); // Complete 1 chapter
+            achievements.UserAchievements.Should().Contain(a => a.Name == "Complete 5 lessons" && !a.IsCompleted && a.Progress == 2);
+            achievements.UserAchievements.Should().Contain(a => a.Name == "Complete 1 chapter" && a.IsCompleted && a.Progress == 1);
 
             await CompleteLessonAsync(userId, 3); // What is swift
             await CompleteLessonAsync(userId, 4); // Hello world
@@ -81,8 +81,8 @@ namespace LearningCenter.Tests.Controllers
             achievements = await GetUserAchievementsAsync(userId);
 
             achievements.Should().NotBeNull();
-            achievements.UserAchievements.Should().Contain(a => a.Id == 1 && a.IsCompleted && a.Progress == 5); // Complete 5 lessons
-            achievements.UserAchievements.Should().Contain(a => a.Id == 4 && a.IsCompleted && a.Progress == 1); // Complete 1 chapter
+            achievements.UserAchievements.Should().Contain(a => a.Name == "Complete 5 lessons" && a.IsCompleted && a.Progress == 5);
+            achievements.UserAchievements.Should().Contain(a => a.Name == "Complete 1 chapter" && a.IsCompleted && a.Progress == 1);
         }
 
         [Fact]
@@ -93,8 +93,8 @@ namespace LearningCenter.Tests.Controllers
             var achievements = await GetUserAchievementsAsync(userId);
 
             achievements.Should().NotBeNull();
-            achievements.UserAchievements.Should().NotContain(a => a.Id == 6); // Complete the Swift course
-            achievements.UserAchievements.Should().NotContain(a => a.Id == 7); // Complete the C# course
+            achievements.UserAchievements.Should().NotContain(a => a.Name == "Complete the Swift course");
+            achievements.UserAchievements.Should().NotContain(a => a.Name == "Complete the C# course");
 
             await CompleteLessonAsync(userId, 1);
             await CompleteLessonAsync(userId, 2);
@@ -105,14 +105,14 @@ namespace LearningCenter.Tests.Controllers
             achievements = await GetUserAchievementsAsync(userId);
 
             achievements.Should().NotBeNull();
-            achievements.UserAchievements.Should().NotContain(a => a.Id == 6); // Complete the Swift course
-            achievements.UserAchievements.Should().Contain(a => a.Id == 7 && a.IsCompleted); // Complete the C# course
+            achievements.UserAchievements.Should().NotContain(a => a.Name == "Complete the Swift course");
+            achievements.UserAchievements.Should().Contain(a => a.Name == "Complete the C# course" && a.IsCompleted);
 
             await CompleteLessonAsync(userId, 6);
 
             achievements = await GetUserAchievementsAsync(userId);
-            achievements.UserAchievements.Should().Contain(a => a.Id == 6 && a.IsCompleted); // Complete the Swift course
-            achievements.UserAchievements.Should().Contain(a => a.Id == 7 && a.IsCompleted); // Complete the C# course
+            achievements.UserAchievements.Should().Contain(a => a.Name == "Complete the Swift course" && a.IsCompleted);
+            achievements.UserAchievements.Should().Contain(a => a.Name == "Complete the C# course" && a.IsCompleted);
         }
     }
 }

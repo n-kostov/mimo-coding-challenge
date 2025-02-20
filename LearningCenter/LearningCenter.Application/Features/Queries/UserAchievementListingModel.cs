@@ -2,15 +2,19 @@
 {
     public class UserAchievementListingModel
     {
-        public UserAchievementListingModel(int id, bool isCompleted, int progress) 
+        public UserAchievementListingModel(int id, string name, bool isCompleted, int goal, int progress) 
         {
             this.Id = id;
+            this.Name = name;
             this.IsCompleted = isCompleted;
+            this.Goal = goal;
             this.Progress = progress;
         }
 
         public int Id { get; }
+        public string Name { get; }
         public bool IsCompleted { get; }
+        public int Goal { get; }
         public int Progress { get; }
     }
 }

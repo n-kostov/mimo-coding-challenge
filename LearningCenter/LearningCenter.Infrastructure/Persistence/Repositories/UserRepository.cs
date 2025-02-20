@@ -23,7 +23,18 @@ namespace LearningCenter.Infrastructure.Persistence.Repositories
             return await this.All()
                 .Where(u => u.Id == userId)
                 .SelectMany(u => u.Achievements)
-                .Select(a => new UserAchievementListingModel(a.AchievementId, a.IsCompleted, a.Progress))
+                .Join(
+                    this.db.Achievements,
+                    userAchievement => userAchievement.AchievementId,
+                    achievement => achievement.Id,
+                    (userAchievement, achievement) => new UserAchievementListingModel(
+                        userAchievement.AchievementId,
+                        achievement.Name,
+                        userAchievement.IsCompleted,
+                        achievement.Goal,
+                        userAchievement.Progress
+                        )
+                )
                 .ToListAsync();
         }
 
